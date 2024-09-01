@@ -1,0 +1,58 @@
+.todoList-wrapper {
+    @apply bg-background-200 p-4 sm:p-8 w-full sm:w-fit mt-4 sm:mt-8 mx-auto rounded-lg;
+}
+
+.title {
+    @apply text-xl sm:text-2xl font-bold text-center mb-2 sm:mb-4;
+}
+
+/* flex: ordenar filar, items-center: centrado vertical, rounded-lg: redondear bordes  */
+/* overflow-hidden: esconde lo que sobra del redondeo */
+.new-todo {
+    @apply relative flex items-center rounded-lg overflow-hidden;
+}
+/* w-full: ancho completo en móviles, w-64: ancho 64(256 px) en pantallas más grandes */
+.new-todo input {
+    @apply w-full sm:w-96 p-2 rounded-lg bg-background-300;
+}
+
+/* absolute: Puede estar en cualquier lugar del contenedor, right-0: posicionar siempre a la derecha  */
+/* text-lg, mayor tamaño letra, h-full: altura de todo el contenedor */
+.new-todo button {
+    @apply absolute right-0 bg-background-400 text-base sm:text-lg font-black h-full px-2 pb-1;
+}
+
+.filters {
+    @apply flex justify-end gap-2 sm:gap-4 my-2 sm:my-3;
+}
+
+.filters button {
+    @apply px-2 py-1 rounded-lg bg-background-300;
+}
+.filters button.active {
+    @apply bg-background-400;
+}
+.todoList {
+    @apply flex flex-col gap-1 sm:gap-2;
+}
+
+.todoList li {
+    @apply flex bg-background-300 px-2 sm:px-4 py-1 sm:py-2 rounded-lg items-center gap-2;
+}
+/* flex-1: ocupa todo el espacio */
+.todoList li.todo label {
+    @apply flex-1;
+}
+.todoList li.todo:hover button {
+    @apply block;
+}
+.todoList li.todo button {
+    @apply hidden text-xs;
+}
+.todoList li.todo input[type="checkbox"] {
+    @apply w-4 h-4 cursor-pointer;
+}
+
+.todoList li.todo-editing input[type="text"] {
+    @apply w-full flex-grow bg-background-400 rounded-lg px-2 outline-none;
+}

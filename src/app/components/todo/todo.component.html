@@ -1,0 +1,39 @@
+<section class="todoList-wrapper">
+    <div class="flex items-center justify-between gap-2">
+        <h1 class="title flex-grow text-center ml-10">Todo App</h1>
+        <button class="right-0 px-2 py-1 rounded-lg bg-background-300 mb-2" (click)="resetTodoList()">Reset</button>
+    </div>
+    
+    <div class="new-todo">
+        <input type="text" placeholder="Escribe una tarea" [formControl]="newTodo" (keydown.enter)="addTodo()"/>
+        <button (click)="addTodo()">+</button>
+    </div>
+    <!-- {{newTodo.value | json}} -->
+    <div class="filters">
+        <button (click)="changeFilter('all')" [class.active]="filter() === 'all'">Todos</button>
+        <button (click)="changeFilter('inProgress')" [class.active]="filter() === 'inProgress'">Pendientes</button>
+        <button (click)="changeFilter('completed')" [class.active]="filter() === 'completed'">Completados</button>
+    </div>
+
+    <ul class="todoList">
+        @for (todo of todoListFiltered(); track todo.id) {
+            @if (todo.editing) {
+                <li class="todo-editing flex">
+                    <input class="w-full flex-grow p-1" type="text" placeholder="Editar Tarea" [value]="todo.title" (keydown.enter)="saveTitleTodo(todo.id, $event)"/>
+                </li>
+            } @else {
+                <li class="todo">
+                    <input type="checkbox" [checked]="todo.completed" (click)="toggleTodo(todo.id)" />
+                    <label >{{todo.title}}</label>
+                    @if (!todo.completed) {
+                        <button (click)="updateTodo(todo.id)">Editar</button>
+                    }
+                    <button class="text-red-500" (click)="removeTodo(todo.id)">Eliminar</button>
+                </li>
+            }
+        }
+        
+
+    </ul>
+    
+</section>
