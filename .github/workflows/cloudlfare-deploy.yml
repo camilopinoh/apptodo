@@ -15,7 +15,7 @@ jobs:
       - name: Preparacion de Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.13.0 # Ver que la version de node sea compatible con el proyecto angular
+          node-version: 22.7.0  # Ver que la version de node sea compatible con el proyecto angular
 
       - name: NPM Clean Install
         env:
@@ -25,7 +25,7 @@ jobs:
             npm ci
             
       - name: Instalar Angular CLI
-        run: npm install -g @angular/cli@18.1.4 # Instalar Angular CLI en el ambiente de workflow
+        run: npm install -g @angular/cli@18.2.2 # Instalar Angular CLI en el ambiente de workflow
 
       - name: Build Production Angular app
         run: ng build
@@ -35,6 +35,6 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: flowbite-angular # e.g. 'my-project'
-          directory: dist/flowbite-angular/browser # e.g. 'dist'
+          projectName: apptodo # e.g. 'my-project'
+          directory: dist/apptodo/browser # e.g. 'dist'
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
