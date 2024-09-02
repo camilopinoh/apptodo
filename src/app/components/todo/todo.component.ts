@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
   templateUrl: './todo.component.html',
   styleUrl: './todo.component.css'
 })
+
 export class TodoComponent implements OnInit {
   todoList = signal< TodoModel[]>([
     { id: 1, title: 'Comprar arroz', completed: false, editing: false },
@@ -35,6 +36,7 @@ export class TodoComponent implements OnInit {
   })
   
 
+  // Form control para el input de agregar tarea
   newTodo = new FormControl('',{
     nonNullable: true,
     validators: [
@@ -73,10 +75,12 @@ export class TodoComponent implements OnInit {
     this.todoList.set(defaultTodos);
   }
 
+  // Función para cambiar el filtro
   changeFilter(filterString: FilterType){
     this.filter.set(filterString);
   }
 
+  // Función para agregar una tarea
   addTodo(){
     const newTodoTitle = this.newTodo.value.trim();
     if (this.newTodo.valid && newTodoTitle !== ''){
@@ -94,6 +98,7 @@ export class TodoComponent implements OnInit {
     }
   }
 
+  // Función para cambiar estado de la tarea
   toggleTodo(todoId: number){
     return this.todoList.update((prev_todos) => 
       prev_todos.map((todo) => {
@@ -105,12 +110,14 @@ export class TodoComponent implements OnInit {
     );
   }
 
+  // Función para eliminar una tarea
   removeTodo (todoId: number){
     this.todoList.update((prev_todos) =>
       prev_todos.filter((todo) => todo.id !== todoId )
     );
   }
 
+  // Función para habilitar editar una tarea
   updateTodo(todoId: number){
     return this.todoList.update((prev_todos) => 
       prev_todos.map((todo) => {
@@ -122,6 +129,7 @@ export class TodoComponent implements OnInit {
     );
   }
 
+  // Función para guardar el título editado de una tarea
   saveTitleTodo(todoId: number, event: Event){
     const title = (event.target as HTMLInputElement).value;
     return this.todoList.update((prev_todos) => 
